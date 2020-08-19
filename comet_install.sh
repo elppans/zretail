@@ -1,16 +1,17 @@
 #!/bin/bash
 
-DIR='/opt/custom'
+DIR='/opt/custom/tgz'
 BIN='/usr/bin'
 LBIN='/usr/local/bin'
 NODE='/usr/local/node/bin'
 LINKCMT='https://github.com/elppans/zretail/raw/master'
-COMET='comet_zanthus_1.0.1.4_254.v4.tar.xz'
+COMET='comet_zanthus_1.0.1.4_254.v4.tgz'
 HTDOCS='/usr/local/apache22/htdocs/'
 HTCOMET=""$HTDOCS"comet_zanthus"
 PATH=""$HTDOCS"src"
 PATHCFG=""$PATH"/configurador_servidor.js"
-IPSERV='127.0.0.1'
+IPSERV='192.168.10.254'
+NIPSERV='127.0.0.1'
 #IPCMT='/tmp/comet_ip'
 
 mkdir -p "$DIR"
@@ -19,7 +20,7 @@ wget -c "$LINKCMT"/"$COMET"
 tar -zxvf "$COMET" -C "$HTDOCS"
 ln -sfv "$NODE"/* "$BIN"
 ln -sfv  "$NODE"/* "$LBIN"
-sed -i "s/"$IPSERV"/127.0.0.1/g" "$PATHCFG"
+sed -i "s/"$IPSERV"/"$NIPSERV"/g" "$PATHCFG"
 ln -sf "$HTCOMET"/comet_zanthus "$BIN"
 ln -sf "$HTCOMET"/comet_clear-log.sh /etc/cron.daily/
 
@@ -31,7 +32,7 @@ ln -sf "$HTCOMET"/comet_clear-log.sh /etc/cron.daily/
 #systemctl enable comet_zanthus
 #service comet_zanthus start
 
-# Serviço systemctl
+# Serviço systemctl:
 ln -sf "$HTCOMET"/comet_zanthus.service /lib/systemd/system
 systemctl daemon-reload
 systemctl enable comet_zanthus
