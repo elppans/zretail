@@ -6,18 +6,32 @@ LBIN='/usr/local/bin'
 NODE='/usr/local/node/bin'
 LINKCMT='https://github.com/elppans/zretail/raw/master'
 COMET='comet_zanthus_1.0.1.4_254.v5.tgz'
-HTDOCS='/usr/local/apache22/htdocs/'
-HTCOMET=""$HTDOCS"comet_zanthus"
-PATHSRC=""$HTDOCS"src"
+HTDOCS='/usr/local/apache22/htdocs'
+HTCOMET=""$HTDOCS"/comet_zanthus"
+PATHSRC=""$HTCOMET/"src"
 PATHCFG=""$PATHSRC"/configurador_servidor.js"
 IPSERV='192.168.10.254'
 NIPSERV='127.0.0.1'
 #IPCMT='/tmp/comet_ip'
 
+if [ "$(id -u)" != "0" ]; then
+echo "Deve executar o comando como super usuario!"
+exit 0
+fi
+
+LOCAL=`pwd`
+
+if [ ! "$LOCAL" == "$DIR" ] ; then
+        echo "O instalador deve estar na pasta "$DIR"!"
+        sleep 2
+        exit 0
+fi
+
+echo "Comet Zanthus..."
 mkdir -p "$DIR"
 cd "$DIR"
-wget -c "$LINKCMT"/"$COMET"
-tar -zxvf "$COMET" -C "$HTDOCS"
+#wget -c "$LINKCMT"/"$COMET"
+tar -zxf "$COMET" -C "$HTDOCS"
 ln -sfv "$NODE"/* "$BIN"
 ln -sfv  "$NODE"/* "$LBIN"
 sed -i "s/"$IPSERV"/"$NIPSERV"/g" "$PATHCFG"
@@ -26,17 +40,22 @@ ln -sf "$HTCOMET"/comet_clear-log.sh /etc/cron.daily/
 
 
 
-# Serviço init.d:
+echo "Serviço init.d..."
 #ln -sf "$HTCOMET"/comet_zanthus /etc/init.d/comet_zanthus
 #chkconfig comet_zanthus on
 #systemctl enable comet_zanthus
 #service comet_zanthus start
-
-# Serviço systemctl:
+echo "Serviço systemctl..."
 ln -sf "$HTCOMET"/comet_zanthus.service /lib/systemd/system
 systemctl daemon-reload
-systemctl enable comet_zanthus
+if systemctl is-enabled comet_zanthus ; then
+systemctl stop comet_zanthus
 systemctl start comet_zanthus
+  else
+systemctl enable comet_zanthus
+systemctl stop comet_zanthus
+systemctl start comet_zanthus
+fi
 systemctl status comet_zanthus
 
 ##	arquivo comet_zanthus.service:
@@ -68,6 +87,3 @@ systemctl status comet_zanthus
 #Fonte:
 #https://pt.stackoverflow.com/questions/184743/como-posso-extrair-apenas-o-pid-de-um-processo
 #https://pt.stackoverflow.com/questions/246869/linux-leitura-correta-do-pid-linux
-
-
-
