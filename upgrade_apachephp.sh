@@ -3,7 +3,9 @@
 # apache
 yum --nogpgcheck -y install libmcrypt
 
-apachectl_on -so && systemctl stop Zapachectl.service
+#apachectl_on -so
+pkill -9 apachectl_on
+systemctl stop Zapachectl.service
 /usr/local/apache22/bin/apachectl stop
 kill -9 `ps ax | grep -v grep | grep httpd | awk '{print $1}'`
 systemctl disable Zapachectl.service
