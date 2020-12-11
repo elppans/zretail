@@ -15,5 +15,7 @@ mv /etc/init.d/apache /etc/init.d/apache.old
 chmod 000 /etc/init.d/apache.old
 rm -rf  /usr/bin/apachectl_on /usr/bin/zapctl
 rm -rf /etc/rc.d/init.d/Zapachectl
+rm -rf  /etc/rc.d/rc?.d/*Zapachectl
+systemctl daemon-reload
 cd /opt
 ./02_aplicacao_postgresql.sh
