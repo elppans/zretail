@@ -48,6 +48,18 @@ sudo systemctl enable --now docker
 systemctl status docker
 docker info
 ```
+### Comando docker-compose
+
+Verificar se o comando está em /usr/bin:
+
+```bash
+file /usr/bin/docker-compose
+```
+Se não estiver na pasta, faça um link:
+
+```bash
+ln -sf /usr/libexec/docker/cli-plugins/docker-compose /usr/bin/
+```
 
 Fontes:  
 
