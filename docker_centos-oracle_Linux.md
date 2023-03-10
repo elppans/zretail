@@ -4,8 +4,8 @@
 ### Adicionar repositório:
 
 ```bash
-yum install -y yum-utils
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
 ### Instalação do pacote:
@@ -13,7 +13,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 #### CentOS:
 
 ```bash
-yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 #### Oracle Linux 7:
@@ -27,7 +27,7 @@ baseurl=https://yum$ociregion.$ocidomain/repo/OracleLinux/OL7/developer/$basearc
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle
 gpgcheck=1
 enabled=1
-' | tee /etc/yum.repos.d/oraclelinux-developer-ol7.repo >> /dev/null
+' | sudo tee /etc/yum.repos.d/oraclelinux-developer-ol7.repo >> /dev/null
 ```
 
 Instalar dependências e desativar repositório developer:
