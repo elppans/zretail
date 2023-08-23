@@ -15,7 +15,8 @@ case $1 in
 		docker-compose up -d
 	;;
 	restart)
-		docker-compose restart
+  		docker-compose down
+    		docker-compose up -d
 	;;
 	*)
 	echo "Falha"
