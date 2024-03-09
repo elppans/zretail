@@ -1,6 +1,6 @@
 # Docker no CentOS/Oracle Linux
 
-## CentOS:  
+## [Red Hat](https://docs.docker.com/engine/install/rhel/):
 
 Instalar utilitários yum:  
 
@@ -8,13 +8,33 @@ Instalar utilitários yum:
 sudo yum install -y yum-utils
 ```
 
-Adicionar repositório no CentOS 7  
+Adicionar repositório no Red Hat  
+
+```
+sudo yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+```
+
+Instalar pacotes Docker no Red Hat  
+
+```bash
+sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+## [CentOS](https://docs.docker.com/engine/install/centos/):  
+
+Instalar utilitários yum:  
+
+```bash
+sudo yum install -y yum-utils
+```
+
+Adicionar repositório no CentOS   
 
 ```
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
-Instalar pacotes Docker no CentOS 7  
+Instalar pacotes Docker no CentOS   
 
 ```bash
 sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -47,6 +67,12 @@ Instalar o Docker:
 sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
+## Docker instalado  
+
+```
+sudo usermod -aG docker ${USER}
+```
+
 ### Ativar serviço:
 
 ```bash
@@ -65,6 +91,12 @@ Se não estiver na pasta, faça um link:
 
 ```bash
 ln -sf /usr/libexec/docker/cli-plugins/docker-compose /usr/bin/
+```
+
+Testar o Docker Compose:  
+
+```
+docker compose version
 ```
 
 Fontes:  
