@@ -1,24 +1,28 @@
 # Docker no CentOS/Oracle Linux
 
+## CentOS:  
 
-### Adicionar repositório:
+Instalar utilitários yum:  
 
 ```bash
 sudo yum install -y yum-utils
+```
+
+Adicionar repositório no CentOS 7  
+
+```
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
-### Instalação do pacote:
-
-#### CentOS:
+Instalar pacotes Docker no CentOS 7  
 
 ```bash
 sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-#### Oracle Linux 7:
+## Oracle Linux 7:  
 
-Configurar repositório developer:
+Configurar repositório developer:  
 
 ```bash
 echo -e '[ol7_developer]
@@ -30,12 +34,14 @@ enabled=1
 ' | sudo tee /etc/yum.repos.d/oraclelinux-developer-ol7.repo >> /dev/null
 ```
 
-Instalar dependências e desativar repositório developer:
+Instalar dependências e desativar repositório developer:  
+
 ```bash
 sudo yum -y install container-selinux slirp4netns fuse-overlayfs
 sudo yum-config-manager --disable ol7_developer
 ```
-Instalar o Docker:
+
+Instalar o Docker:  
 
 ```bash
 sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -50,10 +56,10 @@ docker info
 ```
 ### Comando docker-compose
 
-Verificar se o comando está em /usr/bin:
+Verificar se o comando `compose` está em **/usr/bin**:
 
 ```bash
-file /usr/bin/docker-compose
+ls -l /usr/bin/docker-compose
 ```
 Se não estiver na pasta, faça um link:
 
