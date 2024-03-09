@@ -1,4 +1,4 @@
-# Docker no principais Distros Linux
+# Docker nas principais Distros Linux
 
 ## [Red Hat](https://docs.docker.com/engine/install/rhel/):
 
