@@ -27,9 +27,9 @@ firewall-cmd --state && echo OK || { echo -e "Falha" ; exit 1 ; }
 # dns = 53/tcp 53/udp
 # mdns = 5353/udp
 # samba =139/tcp 445/tcp, 137/udp 138/udp
-# http = 80/tcp
-# https = 443/tcp
-# cockpit = 9090/tcp
+# http - manager = 80/tcp
+# https - manager = 443/tcp
+# cockpit - PHP / POS Module  = 9090/tcp
 # ssh = 22/tcp
 # postgresql = 5432/tcp
 
@@ -37,15 +37,24 @@ firewall-cmd --state && echo OK || { echo -e "Falha" ; exit 1 ; }
 # pgAdmin = 5050/tcp
 # comet = 3040/tcp 3040/udp
 # memcached = 11211/tcp
+# mirage = 8109/tcp
+
 
 firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-service={mdns,dns}
 firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-service={http,https}
 firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-service=samba
 firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-service=postgresql
 firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=3040/tcp --add-port=3040/udp
-firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=81/tcp --add-port=82/tcp
+#firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=81/tcp --add-port=82/tcp
+firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=8899/tcp
+firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=5672/tcp --add-port=6571/tcp --add-port=15672/tcp --add-port=25672/tcp
+#firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=8080/tcp
+firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=123/tcp
+firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=4096/tcp
+firewall-cmd --zone=$(firewall-cmd --get-default-zone) --permanent --add-port=9090/tcp
 firewall-cmd --permanent --add-port=11211/tcp
+firewall-cmd --permanent --add-port=8109/tcp
 #firewall-cmd --permanent --add-port=5050/tcp
 #firewall-cmd --permanent --add-port=5432/tcp
-firewall-cmd --reload 
+firewall-cmd --reload
 firewall-cmd --list-all
