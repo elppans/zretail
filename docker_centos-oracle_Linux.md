@@ -40,9 +40,10 @@ Instalar pacotes Docker no CentOS
 sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-## Oracle Linux 7:  
+## [Oracle Linux](https://blogs.oracle.com/virtualization/post/install-docker-on-oracle-linux-7):  
 
 Configurar repositório developer:  
+>Oracle Linux 7
 
 ```bash
 echo -e '[ol7_developer]
@@ -69,16 +70,17 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 
 ## Docker instalado  
 
+Adicionar o usuário ao grupo `docker`:  
+
 ```
 sudo usermod -aG docker ${USER}
 ```
 
-### Ativar serviço:
+Ativar serviço:
 
 ```bash
 sudo systemctl enable --now docker
 systemctl status docker
-docker info
 ```
 ### Comando docker-compose
 
@@ -97,6 +99,11 @@ Testar o Docker Compose:
 
 ```
 docker compose version
+```
+Testar Docker:  
+
+```
+docker info
 ```
 
 Fontes:  
