@@ -113,6 +113,13 @@ Ativar serviço:
 sudo systemctl enable --now docker
 systemctl status docker
 ```
+
+Configurar o soquete docker para o usuário:  
+
+```
+sudo chmod 666 /var/run/docker.sock
+```
+
 ### Comando docker-compose
 
 Verificar se o comando `compose` está em **/usr/bin**:
