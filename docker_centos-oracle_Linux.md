@@ -1,4 +1,4 @@
-# Docker no CentOS/Oracle Linux
+# Docker no principais Distros Linux
 
 ## [Red Hat](https://docs.docker.com/engine/install/rhel/):
 
@@ -66,6 +66,37 @@ Instalar o Docker:
 
 ```bash
 sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+## [Debian](https://docs.docker.com/engine/install/debian/)
+
+Adicione a chave GPG oficial do Docker:
+
+```
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+
+Adicione o repositório aos fontes do Apt:  
+>O `sudo` **deve** estar ativado  
+
+```
+echo -e "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+Para instalar a versão mais recente, execute:  
+
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+Verifique se a instalação foi bem-sucedida executando a imagem `hello-world`:  
+
+```
+sudo docker run hello-world
 ```
 
 ## Docker instalado  
